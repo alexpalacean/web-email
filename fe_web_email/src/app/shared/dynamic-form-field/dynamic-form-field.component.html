@@ -1,0 +1,7 @@
+<form [formGroup]="formGroup">
+    <mat-form-field appearance="outline" *ngFor="let formField of formFields">
+        <mat-label>{{formField.label}}</mat-label>
+        <input matInput autocomplete="off" formControlName="{{formField.formControlName}}" type="{{formField?.type}}">
+    </mat-form-field>
+    <ng-content></ng-content>
+</form>
