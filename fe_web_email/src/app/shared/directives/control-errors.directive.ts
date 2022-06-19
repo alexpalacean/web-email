@@ -29,17 +29,12 @@ export class ControlErrorsDirective {
 
   ngOnInit() {
     console.log(this.elementRef.nativeElement.parentElement.parentElement);
-    // merge(
-    //   this.submit$, of(this.controlInstance.valueChanges)
-    // )
-      // forkJoin(
-      //   {
-      //     sourceOne: this.submit$,
-      //     sourceTwo: of(this.controlInstance.valueChanges)
-      //   }
-      // )
-      this.controlInstance.valueChanges!.subscribe(() => {
+  
+    merge(
+      this.submit$, of(this.controlInstance.valueChanges)
+    ).subscribe(() => {
         const controlErrors = this.controlInstance.errors;
+        console.log(controlErrors)
         if (controlErrors) {
           const firstKey = Object.keys(controlErrors)[0];
           const getError = this.errors[firstKey];

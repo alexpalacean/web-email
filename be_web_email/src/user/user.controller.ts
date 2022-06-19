@@ -1,7 +1,7 @@
 import { Controller, Get, Post, Body, Patch, Param, Delete, Res, HttpStatus } from '@nestjs/common';
 
 import { UserService } from './user.service';
-import { CreateUserDto } from './dto/create-user.dto';
+import { UserDto } from './dto/create-user.dto';
 import { UpdateUserDto } from './dto/update-user.dto';
 import { UserDocument } from './schemas/user.schema';
 
@@ -10,7 +10,7 @@ export class UserController {
   constructor(private readonly userService: UserService) { }
 
   @Post()
-  async create(@Body() createUserDto: CreateUserDto, @Res() response): Promise<UserDocument> {
+  async create(@Body() createUserDto: UserDto, @Res() response): Promise<UserDocument> {
     const newUser = await this.userService.create(createUserDto);
     return response.status(HttpStatus.CREATED).json(newUser);
   }

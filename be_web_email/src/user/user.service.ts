@@ -3,18 +3,21 @@ import { HttpException, HttpStatus, Injectable, Res } from '@nestjs/common';
 import { JwtService } from '@nestjs/jwt';
 import { InjectModel } from '@nestjs/mongoose';
 import { Model, Types } from 'mongoose';
+import { Observable } from 'rxjs';
 
-import { CreateUserDto } from './dto/create-user.dto';
+import { UserDto } from './dto/create-user.dto';
 import { UpdateUserDto } from './dto/update-user.dto';
 import { User, UserDocument } from './schemas/user.schema';
 
 @Injectable()
 export class UserService {
 
+  //TODO: create translations for RO and EN
+
   constructor(@InjectModel('users') private userModel: Model<User>, private jwtService: JwtService) { }
 
-  async create(createUserDto: CreateUserDto): Promise<UserDocument> {
-    createUserDto.accessToken = this.jwtService.sign(createUserDto);
+  async create(createUserDto: UserDto): Promise<UserDocument> {
+    // createUserDto.accessToken = this.jwtService.sign(createUserDto);
     const data = await this.userModel.findOne({ email: createUserDto.email });
     if (data) {
       throw new HttpException('Email already exists.', HttpStatus.CONFLICT);
@@ -22,6 +25,10 @@ export class UserService {
       const newUser = new this.userModel(createUserDto);
       return newUser.save();
     }
+  }
+
+  async login(loginUserDto: UserDto): Promise<any> {
+
   }
 
   findOne(id: number) {

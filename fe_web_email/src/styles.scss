@@ -1,14 +1,19 @@
 /* You can add global styles to this file, and also import other style files */
 
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500&display=swap');
+
 html,
 body {
     height: 100%;
 }
 body {
     margin: 0;
-    font-family: Roboto, "Helvetica Neue", sans-serif;
+    // font-family: Roboto, "Helvetica Neue", sans-serif;
 }
 
+*{
+    font-family: 'Montserrat', sans-serif;
+}
 // form.submitted input.ng-invalid,
 // input.ng-dirty.ng-invalid {
 //     border: 1px solid red;
